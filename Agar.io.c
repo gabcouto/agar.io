@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include <windows.h>
-#include <conio.h>
-//#include <raylib.h>
+//#include <windows.h>
+//#include <conio.h>
+#include "raylib.h"
 
 typedef struct posicao
 {
@@ -19,8 +19,8 @@ typedef struct bola
     POSICAO position;
     int raio;
 }BOLA;
-/*Como precisamos representar as "comidas" que tambem sao bolas, podemos definir um tamanho minimo para o raio que o jogador terá e um tamanho TAM
-para representá-las assim: if(comida.raio<TAM){comida.mov=0}, pois a comida nao pode se mover*/
+/*Como precisamos representar as "comidas" que tambem sao bolas, podemos definir um tamanho minimo para o raio que o jogador terÃ¡ e um tamanho TAM
+para representÃ¡-las assim: if(comida.raio<TAM){comida.mov=0}, pois a comida nao pode se mover*/
 
 typedef struct scores//estrutura dos classificados
 {
@@ -28,7 +28,7 @@ typedef struct scores//estrutura dos classificados
     int score[25];
 }SCORES;
 
-void ganhadores(void)//funcao que exibe classificados // acho que deve estar funcionando mas de uma olhada só para ter certeza
+void ganhadores(void)//funcao que exibe classificados // acho que deve estar funcionando mas de uma olhada sÃ³ para ter certeza
 {
     FILE* arquivo;
     SCORES winners[10];
