@@ -39,7 +39,7 @@ void ganhadores(void)//funcao que exibe classificados // acho que deve estar fun
         DrawText(". Nome:", 324, 100+(i*30), 11, DARKGRAY);
         DrawText(winners[i].nome, 326, 101+(i*30), 11, DARKGRAY);
         DrawText(" Pontuacao: ", 326, 102+(i*30), 11, DARKGRAY);
-        DrawText(winner[i].score, 326, 103+(i*30), 11, DARKGRAY);
+        DrawText(winners[i].score, 326, 103+(i*30), 11, DARKGRAY);
         DrawText("\n", 323, 104+(i*30), 11, DARKGRAY);
     }
     fclose(arquivo);
@@ -48,6 +48,25 @@ void ganhadores(void)//funcao que exibe classificados // acho que deve estar fun
 int main()
 {
     FILE* arquivo;
+    SCORES winners[10];
+    int i;
+
+    arquivo=fopen("Ganhadores.bin","a+b");
+    for(i=0;i<10;i++){
+        printf("Entre nome do jg %d:\n", i+1);
+        fflush(stdin);
+        fgets(winners[i].nome,51,stdin);
+        printf("Entre score do jog %d:\n", i+1);
+        scanf("%d", &winners[i].score);
+    }
+    for(i=0;i<10;i++){
+        fwrite(&winners[i],sizeof(SCORES),1,arquivo);
+    }
+    fclose(arquivo);
+    InitWindow(800,450,"NIGGER");
+    ganhadores();
+    return 0;
+}
     SCORES winners[10];
     int i;
 
