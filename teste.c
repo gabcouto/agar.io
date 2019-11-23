@@ -35,7 +35,12 @@ void ganhadores(void)//funcao que exibe classificados // acho que deve estar fun
     arquivo=fopen("Ganhadores.bin","a+b");
     fread(winners,sizeof(SCORES),10,arquivo);
     for(i=0;i<10;i++){
-        DrawText(". Nome:    Pontuacao: \n", 323, 100+(i*30), 11, DARKGRAY);
+        DrawText(i+1, 323, 100+(i*30), 11, DARKGRAY);
+        DrawText(". Nome:", 324, 100+(i*30), 11, DARKGRAY);
+        DrawText(winners[i].nome, 326, 101+(i*30), 11, DARKGRAY);
+        DrawText(" Pontuacao: ", 326, 102+(i*30), 11, DARKGRAY);
+        DrawText(winner[i].score, 326, 103+(i*30), 11, DARKGRAY);
+        DrawText("\n", 323, 104+(i*30), 11, DARKGRAY);
     }
     fclose(arquivo);
 }
