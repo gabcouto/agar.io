@@ -49,7 +49,8 @@ int main(void)
 }
 	
 void print_menu(void)
-{
+{	/*Ao adicionar este WindowShouldClose, há uma situação em que o programa não se comporta como esperado.
+	Se você entrar em alguma das opções que exibe cor e apertar esc, nada acontece. mas, em seguida, se apertar tab, o jogo fecha totalmente.*/
 	while(!(IsKeyPressed(KEY_ENTER) && count == 3)/*&& !(WindowShouldClose())*/)     //  Por algum motivo colocar WSC() na mesma negacao nao funciona
 	{	
 	BeginDrawing();
