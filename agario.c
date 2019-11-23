@@ -50,7 +50,7 @@ int main(void)
 	
 void print_menu(void)
 {
-	while(!(IsKeyPressed(KEY_ENTER) && count == 3)/*&& !(WindowShouldClose()*/))     //  Por algum motivo colocar WSC() na mesma negacao nao funciona
+	while(!(IsKeyPressed(KEY_ENTER) && count == 3)/*&& !(WindowShouldClose())*/)     //  Por algum motivo colocar WSC() na mesma negacao nao funciona
 	{	
 	BeginDrawing();
 		int desce = 10;
