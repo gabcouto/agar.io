@@ -15,12 +15,26 @@ typedef enum TelaJogo { MENU = 0, NOVA, CARREGAR, GANHADORES, SAIR, SALVAR} Tela
 
 int main(void)
 {
+	typedef struct scores//estrutura dos classificados
+	{
+   		char nome[51];
+    		int score;
+	}SCORES;
 
 	// Abrimos uma janela.
 	const int larguraTela = 800;
 	const int alturaTela = 450;
 	int desce = 10;
 	int sair = 0;
+	// Declaramos coisas de arquivos.
+	FILE* arquivo;
+    	SCORES winners[10];
+    	int i;
+
+
+
+
+
 	// Esta função abre uma janela com um nome dado por uma string.
 	InitWindow(larguraTela, alturaTela, "Agar.io");
 	
@@ -70,6 +84,9 @@ int main(void)
 				printf("Ganhadores selecionado.\n");
 				if(IsKeyPressed(KEY_TAB))
 					telaAtual = MENU;
+				arquivo=fopen("Ganhadores.bin","a+b");
+    				fread(winners,sizeof(SCORES),10,arquivo);
+				
 
 
 			} break;
@@ -141,8 +158,17 @@ int main(void)
 				} break;
 				case GANHADORES:
 				{
-					ClearBackground(BLACK);
-
+					ClearBackground(RAYWHITE);
+					for(i=0;i<10;i++)
+					{
+       						DrawText(i+1, 323, 100+(i*30), 11, DARKGRAY);
+        					DrawText(". Nome:", 324, 100+(i*30), 11, DARKGRAY);
+        					DrawText(winners[i].nome, 326, 101+(i*30), 11, DARKGRAY);
+        					DrawText(" Pontuacao: ", 326, 102+(i*30), 11, DARKGRAY);
+       						DrawText(winners[i].score, 326, 103+(i*30), 11, DARKGRAY);
+        					DrawText("\n", 323, 104+(i*30), 11, DARKGRAY);
+   					}
+    					fclose(arquivo);
 
 
 				} break;
@@ -171,4 +197,3 @@ int main(void)
 	return 0;
 
 }
-
