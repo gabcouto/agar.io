@@ -1,8 +1,6 @@
 /*
 Arthur Baumgardt & Gabriel Couto
-
 Implementação de agar.io utilizando a biblioteca raylib.h
-
 */
 
 
@@ -40,83 +38,92 @@ int main(void)
 	// Definimos a quantidade de FPS.
 	SetTargetFPS(60);
 
-	// Enquanto não for detectada a tecla ESC, repete este while.
-	while(!(IsKeyPressed(KEY_ENTER) && count == 3))
-	{
-	
-		
-		
-
-
-		BeginDrawing();
-
-
-
-	
 		// Indica que vamos começar a desenhar na tela.
-		print_menu();
-			
-		if(IsKeyPressed(KEY_DOWN))
-			count++;
-		if(IsKeyPressed(KEY_UP))
-			count--;
-						
-		if(count > 3)
-			count = 0;
-		if(count < 0)
-			count = 3;
-		
-		
-
-
-		switch(count)
-		{
-		case 0:
-			DrawText("Nova partida", 323, desce+100, 20, LIGHTGRAY);
-			if(IsKeyPressed(KEY_ENTER))
-				nova_partida();
-			break;
-		case 1:
-			DrawText("Carregar partida", 300, desce+130, 20, LIGHTGRAY);
-			if(IsKeyPressed(KEY_ENTER))
-				carrega_partida();			
-			break;
-		case 2:
-			DrawText("Exibir ganhadores", 300, desce+160, 20, LIGHTGRAY);
-			if(IsKeyPressed(KEY_ENTER))
-				mostra_ganhadores();
-			break;
-		case 3:
-			DrawText("Sair", 369, desce+190, 20, LIGHTGRAY);
-			if(IsKeyPressed(KEY_ENTER))
-			{
-					
-			}
-
-		}
-		
-		EndDrawing();			
-	}
-
+		print_menu();		
+	
+	printf("\nDEBUG: Saímos do loop do menu. Fechando janela...\n");
 	CloseWindow();
 
-
 	return 0;
-
 
 }
 	
 void print_menu(void)
 {
-		
+	while(!(IsKeyPressed(KEY_ENTER) && count == 3))
+	{	
+	BeginDrawing();
 		int desce = 10;
 		// Limpa o plano de fundo com uma cor selecionada.
 		ClearBackground(RAYWHITE);
-			DrawText("Agar.io", 300, 10, 60, DARKGRAY);
-			DrawText("Nova partida", 323, desce+100, 20, DARKGRAY);
-			DrawText("Carregar partida", 300, desce+130, 20, DARKGRAY);
-			DrawText("Exibir ganhadores", 300, desce+160, 20, DARKGRAY);
-			DrawText("Sair", 369, desce+190, 20, DARKGRAY);
+		DrawText("Agar.io", 300, 10, 60, DARKGRAY);
+		DrawText("Nova partida", 323, desce+100, 20, DARKGRAY);
+		DrawText("Carregar partida", 300, desce+130, 20, DARKGRAY);
+		DrawText("Exibir ganhadores", 300, desce+160, 20, DARKGRAY);
+		DrawText("Sair", 369, desce+190, 20, DARKGRAY);
+		if(IsKeyPressed(KEY_DOWN))
+			count++;
+		if(IsKeyPressed(KEY_UP))
+			count--;				
+		if(count > 3)
+			count = 0;
+		if(count < 0)
+			count = 3;
+		
+		switch(count)
+		{
+		case 0:
+			DrawText("Nova partida", 323, desce+100, 20, LIGHTGRAY);
+			if(IsKeyPressed(KEY_ENTER))
+			{
+				while (!IsKeyPressed(KEY_TAB))
+				{
+					printf("!!\n");
+					EndDrawing(); // Colocar EndDrawing corrige aquele problema de travamento.
+					nova_partida();
+		
+				}								
+			}
+			break;
+		case 1:
+			DrawText("Carregar partida", 300, desce+130, 20, LIGHTGRAY);
+			if(IsKeyPressed(KEY_ENTER))
+			{
+				while (!IsKeyPressed(KEY_TAB))
+				{
+					printf("!!\n");
+					EndDrawing();
+					carrega_partida();
+		
+				}		
+
+
+			}
+			break;
+		case 2:
+			DrawText("Exibir ganhadores", 300, desce+160, 20, LIGHTGRAY);
+			if(IsKeyPressed(KEY_ENTER))
+			{
+				while (!IsKeyPressed(KEY_TAB))
+				{
+					printf("!!\n");
+					EndDrawing();
+					mostra_ganhadores();
+		
+				}
+
+
+			}
+			break;
+		case 3:
+			DrawText("Sair", 369, desce+190, 20, LIGHTGRAY);
+
+		}
+		
+	EndDrawing();	
+	}	
+
+
 
 
 }
@@ -124,25 +131,18 @@ void print_menu(void)
 
 void nova_partida(void)
 {
-	while(!IsKeyDown(KEY_Q))
-		ClearBackground(MAGENTA);
+	ClearBackground(MAGENTA);
 	
-
-
-
 }
 
 void carrega_partida(void)
 {
-	int i=0;
 	ClearBackground(SKYBLUE);
-	printf("TESTE\n\n\n\n\n\n\n\n\n\n\n");
 
 }
 
 void mostra_ganhadores(void)
 {
-	while(!IsKeyDown(KEY_Q))
 		ClearBackground(BLACK);
 
 
@@ -168,11 +168,4 @@ void continua(pCRONOMETRO c) {
         c->inicio += clock() - c->fim;
     }
 }
-
-
-
-
-
-
-
 
