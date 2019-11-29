@@ -1,0 +1,30 @@
+#include <string.h>
+
+FILE* arquivo;
+SCORES winners[10], aux;
+char nome[51];
+int j, k;
+
+if(!arquivo=fopen("Ganhadores.bin","rb"))
+{
+  arquivo=fopen("Ganhadores.bin",a+b);
+  DrawText("Você entrou nos classificados! Entre seu nome abaixo:", 200, 150, 40,DARKGRAY);
+  ////////////////////pedir nome
+}
+fread(winners,sizeof(SCORES),10,arquivo);
+for(j=0;j<10;j++)
+{
+  if(pontos>=winners[j].score)
+  {
+    if(pontos==winner[j].score)
+    {
+      for(k=j;k<10;k++)
+      {
+        if(pontos>winners[k].score)
+        {
+          
+        }
+      }
+    }
+  }
+}
