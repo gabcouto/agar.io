@@ -1,0 +1,15 @@
+    Scores winners[10];
+    FILE* arquivo;
+    int pos=0;
+    
+    arquivo=fopen("Ganhadores.bin","a+b");
+    fread(winners,sizeof(Scores),10,arquivo);
+    ClearBackground(RAYWHITE);
+		DrawText("Agar.io", 300, 10, 60, DARKGRAY);
+    DrawText("Classificação", 280, 50, 50, DARKGRAY);
+    for(j=0;(j<10);j++)
+    {
+      DrawText(TextFormat("Nome: %s - Pontuação: %d", winners[j].nome, winners[j].score), 250, 90+pos, 30, DARKGRAY);
+      pos+=20;
+    }
+    fclose(arquivo);
