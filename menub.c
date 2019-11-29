@@ -43,6 +43,7 @@ int main(void)
 	FILE* arquivo;
     	SCORES winners[10];
 	int colis[2];
+	int saiu_voltou = 0;
 
 	// #################################### FORMATO TEMPORÁRIO DE COMO ESTÃO SENDO DECLARADAS AS BOLINHAS ###########################
 
@@ -56,7 +57,7 @@ int main(void)
 	    bolas[teste2-1].posicao.x = 24*teste2;
 	    bolas[teste2-1].posicao.y = 24*teste2;
 	}*/
-/*
+
 	bolas[0].posicao.x = 100;
 	bolas[0].posicao.y = 60;
 	bolas[1].posicao.x = 200;
@@ -75,12 +76,12 @@ int main(void)
 	bolas[7].posicao.y = 420;
 	bolas[8].posicao.x = 750;
 	bolas[8].posicao.y = 440;
-*/
+	/*
 	for(teste2 = 0; teste < 9; teste++)
 	{	
 	bolas[teste2].posicao.x = 400;
 	bolas[teste2].posicao.y = 400;
-	}
+	}*/
 
 	bolas[1].movimento = 0;
 
@@ -132,13 +133,42 @@ int main(void)
 			} break;
 			case NOVA:
 			{	
-				printf("Nova partida selecionado.\n");
+				if(saiu_voltou)
+				{
+					bolas[0].posicao.x = 100;
+					bolas[0].posicao.y = 60;
+					bolas[1].posicao.x = 200;
+					bolas[1].posicao.y = 120;
+					bolas[2].posicao.x = 300;
+					bolas[2].posicao.y = 180;
+					bolas[3].posicao.x = 400;
+					bolas[3].posicao.y = 240;
+					bolas[4].posicao.x = 500;
+					bolas[4].posicao.y = 300;
+					bolas[5].posicao.x = 600;
+					bolas[5].posicao.y = 360;
+					bolas[6].posicao.x = 700;
+					bolas[6].posicao.y = 400;
+					bolas[7].posicao.x = 800;
+					bolas[7].posicao.y = 420;
+					bolas[8].posicao.x = 750;
+					bolas[8].posicao.y = 440;
+
+					saiu_voltou = 0;
+
+				
+				}
+
+				//printf("Nova partida selecionado.\n");
 				if(IsKeyPressed(KEY_TAB))
 				{
 					telaAtual = SALVAR;
 					//telaAtual = MENU;
 				}
 				
+				
+
+
 				for(j = 0; j<NUM_BOLAS; j++)
 				{
 					switch(bolas[j].movimento)
@@ -169,67 +199,103 @@ int main(void)
 						case 2:
 						{
 						//movemos em uma direção fixa.
-						bolas[j].posicao.x +=1.0f;
+						bolas[j].posicao.x +=0.4f;
 
 						} break;
 						case 3:
 						{
 						//movemos em uma direção fixa.
-						bolas[j].posicao.x -=1.0f;
+						bolas[j].posicao.x -=0.4f;
 						} break;
 						case 4:
 						{
 						//movemos em uma direção fixa.
-						bolas[j].posicao.x +=1.0f;
-						bolas[j].posicao.y +=1.0f;
+						bolas[j].posicao.x +=0.4f;
+						bolas[j].posicao.y +=0.4f;
 
 						} break;
 						case 5:
 						{
 						//movemos em uma direção fixa.
-						bolas[j].posicao.x -=1.0f;
-						bolas[j].posicao.y +=1.0f;
+						bolas[j].posicao.x -=0.4f;
+						bolas[j].posicao.y +=0.4f;
 
 						} break;
 						case 6:
 						{
 						//movemos em uma direção fixa.
-						bolas[j].posicao.y +=1.0f;
+						bolas[j].posicao.y +=0.4f;
 
 						} break;
 						case 7:
 						{
 						//movemos em uma direção fixa.
-						bolas[j].posicao.y -=1.0f;
+						bolas[j].posicao.y -=0.4f;
 
 						} break;
 						case 8:
 						{
 						// aproximamos algumas posicoes da posicao de clayton (nossa bola)
 						if(bolas[j].posicao.y>clayton.posicao.y)
-						    bolas[j].posicao.y-=1.0f;
+						    bolas[j].posicao.y-=0.4f;
 						if(bolas[j].posicao.y<clayton.posicao.y)
-						    bolas[j].posicao.y+=1.0f;
+						    bolas[j].posicao.y+=0.4f;
 						if(bolas[j].posicao.x>clayton.posicao.x)
-						    bolas[j].posicao.x-=1.0f;
+						    bolas[j].posicao.x-=0.4f;
 						if(bolas[j].posicao.x<clayton.posicao.x)
-						    bolas[j].posicao.x+=1.0f;
+						    bolas[j].posicao.x+=0.4f;
 
 						} break;
 						default: break;
 					}
+					
 
-                    			for(colis[0]=0; colis[0]<NUM_BOLAS-1; colis[0]++)
+					if(IsKeyDown(KEY_RIGHT)){
+						for(j=0; j<NUM_BOLAS; j++){
+							bolas[j].posicao.x-=2.0f;
+						}
+					}
+       					if(IsKeyDown(KEY_LEFT)){
+						for(j=0; j<NUM_BOLAS; j++){
+							bolas[j].posicao.x+=2.0f;
+						}
+					}
+					if(IsKeyDown(KEY_UP)){
+						for(j=0; j<NUM_BOLAS; j++){
+							bolas[j].posicao.y+=2.0f;
+						}
+					}
+					if(IsKeyDown(KEY_DOWN)){
+						for(j=0; j<NUM_BOLAS; j++){
+							bolas[j].posicao.y-=2.0f;
+						}
+					}
+
+
+                    			/*for(colis[0]=0; colis[0]<NUM_BOLAS-1; colis[0]++)
 					{
 					
 						for(colis[1] = colis[0]+1; colis[1] < NUM_BOLAS; colis[1]++)
 						{							
 							if(CheckCollisionCircles(bolas[colis[0]].posicao, bolas[colis[0]].raio, bolas[colis[1]].posicao, bolas[colis[0]].raio))
-								printf("\nNigger: bolinha %d com bolinha %d\n\n", colis[0], colis[1]);
-				
+								printf("\nbolinha %d com bolinha %d\n\n", colis[0], colis[1]);
+								bolas[colis[0]].posicao.x=100000;
+								bolas[colis[1]].posicao.x=100000;
+								
 				
 						}
 					}
+*/
+					/*for(colis[0]=0; colis[0]<NUM_BOLAS; colis[0]++)
+					{
+						printf("\n%d, %f, %f, %f\n", colis[0], bolas[colis[0]].posicao.x, bolas[colis[0]].posicao.y, bolas[colis[0]].raio);
+						if(CheckCollisionCircles(bolas[colis[0]].posicao, bolas[colis[0]].raio, clayton.posicao, clayton.raio))
+						{
+							printf("\nClayton achou sua presa, a bolinha %d caiu em suas garras", colis[0]);
+							bolas[colis[0]].posi2cao.x+=200.0f;
+						}
+
+					}*/
 
 				}
 				
@@ -237,6 +303,11 @@ int main(void)
 			} break;
 			case CARREGAR:
 			{
+				saiu_voltou = 0;
+				arquivo = fopen("meu_agario.bin", "rb");
+				fread(bolas, sizeof(BOLA), NUM_BOLAS, arquivo);
+				fclose(arquivo);
+				telaAtual = NOVA;
 				printf("Carregar partida selecionado.\n");
 				if(IsKeyPressed(KEY_TAB))
 					telaAtual = MENU;
@@ -268,10 +339,14 @@ int main(void)
 			} break;
 			case SALVAR:
 			{
-				printf("Salvar selecionado.\n");
+				saiu_voltou = 1;
+				//printf("Salvar selecionado.\n");
 				if(IsKeyPressed(KEY_S))
 				{
 					//rotina de salvar (pode ser uma função).
+					arquivo = fopen("meu_agario.bin", "w+b");
+					fwrite(&bolas, sizeof(BOLA), NUM_BOLAS, arquivo);
+					fclose(arquivo);
 					telaAtual = MENU;
 				}
 				else if(IsKeyPressed(KEY_N))
@@ -294,6 +369,14 @@ int main(void)
 					DrawText("Carregar partida", 300, desce+130, 20, DARKGRAY);
 					DrawText("Exibir ganhadores", 300, desce+160, 20, DARKGRAY);
 					DrawText("Sair", 369, desce+190, 20, DARKGRAY);
+
+					DrawText("Utilize as setas para se mover.",10,330,15,DARKGRAY);
+					DrawText("Pressione 'TAB' para voltar ao MENU e/ou salvar partida.",10,350,15,DARKGRAY);
+					DrawText("Aperte 'ENTER' para selecionar uma opção.",10,370,15,DARKGRAY);
+					DrawText("A cor roxa indica que uma bola é venenosa.",10,390,15,DARKGRAY);
+					DrawText("Caso o jogador encoste nela, ficará roxo por alguns segundos.",25,410,15,DARKGRAY);
+					DrawText("A cor vermelha indica que uma bola é explosiva.",10,430,15,DARKGRAY);
+					
 					
 					switch(count)
 					{
