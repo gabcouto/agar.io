@@ -19,6 +19,13 @@ if(!arquivo=fopen("Ganhadores.bin","rb"))
         }
         tecla=GetKeyPressed();
     }
+    if (IsKeyPressed(KEY_BACKSPACE))
+    {
+        contaletra--;
+        nomejogador[contaletra] = '\0';
+
+        if (contaletra < 0) letterCount = 0;
+    }
     fwrite(winners,sizeof(SCORES),10,arquivo);
     fclose(arquivo);
 }
@@ -41,6 +48,14 @@ for(j=0;(j<10)&&(sai);j++)
                 contletra++;
             }
             tecla=GetKeyPressed();
+            
+        }
+        if (IsKeyPressed(KEY_BACKSPACE))
+        {
+            contaletra--;
+            nomejogador[contaletra] = '\0';
+
+            if (contaletra < 0) letterCount = 0;
         }
         strcpy(nomejogador,winners[j].nome);
         winners[j].score=pontos;
