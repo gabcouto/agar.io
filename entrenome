@@ -2,29 +2,50 @@
 
 FILE* arquivo;
 SCORES winners[10], aux;
-char nome[51];
-int j, k;
+char nomejogador[51]={};
+int j, k, sai=1, tecla=0,contletra=0;
 
 if(!arquivo=fopen("Ganhadores.bin","rb"))
 {
-  arquivo=fopen("Ganhadores.bin",a+b);
-  DrawText("Você entrou nos classificados! Entre seu nome abaixo:", 200, 150, 40,DARKGRAY);
-  ////////////////////pedir nome
+    arquivo=fopen("Ganhadores.bin",a+b);
+    DrawText("Você entrou nos classificados! Entre seu nome abaixo:", 200, 150, 40,DARKGRAY);
+    tecla=GetKeyPressed();
+    while(tecla>0)
+    {
+        if((tecla >= 32) && (tecla <= 125) && (contletra < 50))
+        {
+            nomejogador[contletra]=(char)tecla;
+            contletra++;
+        }
+        tecla=GetKeyPressed();
+    }
+    fwrite(winners,sizeof(SCORES),10,arquivo);
+    fclose(arquivo);
 }
 fread(winners,sizeof(SCORES),10,arquivo);
-for(j=0;j<10;j++)
+for(j=0;(j<10)&&(sai);j++)
 {
-  if(pontos>=winners[j].score)
-  {
-    if(pontos==winner[j].score)
+    if(pontos>winners[j].score)
     {
-      for(k=j;k<10;k++)
-      {
-        if(pontos>winners[k].score)
+        for(k=9;k>j;k--)
         {
-          
+            strcpy(winners[k].nome,winners[k-1].nome);
+            winners[k].score=winners[k-1].score;
         }
-      }
+        tecla=GetKeyPressed();
+        while(tecla>0)
+        {
+            if((tecla >= 32) && (tecla <= 125) && (contletra < 50))
+            {
+                nomejogador[contletra]=(char)tecla;
+                contletra++;
+            }
+            tecla=GetKeyPressed();
+        }
+        strcpy(nomejogador,winners[j].nome);
+        winners[j].score=pontos;
+        sai=0;
     }
-  }
 }
+fwrite(winners,sizeof(SCORES),10,arquivo);
+fclose(arquivo);
