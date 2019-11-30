@@ -1,0 +1,13 @@
+void le_dificuldade(int pontos)
+  {
+    int i;
+    
+    if(pontos/10 > 0)
+    {
+      for(i=0;i<NUM_BOLA;i++)
+      {
+        bolas[i].velocidade+=0.001f;
+      }
+      le_dificuldade(pontos/10);
+    }
+  }
