@@ -1,0 +1,72 @@
+// prototipo
+
+int entra_ranking(pSCORES, int, int);
+void desce_um(pSCORES, int, int);
+
+
+// na logica do case SALVAGAN:
+
+
+
+				arquivo=fopen("Ganhadores.bin","a+b");
+				fread(winners,sizeof(SCORES),10,arquivo);
+	
+				entra_rank = entra_ranking(winners, pontos, posicao_alterabin);				
+
+				if(entra_rank > -1)
+				{	// pega dados jogador
+					desce_um(winners, pontos, entra_rank);
+					strcpy(winners[entra_rank].nome, nomejogador);
+					winners[entra_rank].score = pontos;
+					
+				}
+				else
+					telaAtual = MENU;
+			
+
+
+
+
+				fwrite(winners,sizeof(SCORES),10,arquivo);
+				fclose(arquivo);
+				
+
+				
+
+// funcoes declaradas no final:
+
+
+int entra_ranking(pSCORES winners, int pontos, int n)
+{
+	if(n>9)
+		return -1;
+	if(pontos > winners[n].score)
+		return n;
+	if(pontos < winners[n].score)
+		return entra_ranking(winners, pontos, n);
+}
+
+void desce_um(pSCORES winners, int pontos, int n)
+{
+	if(n<9)
+	{
+		winners[n+1].score = winners[n].score;
+		strcpy(winners[n+1].nome, winners[n].nome);
+		desce_um(winners, pontos, n+1);
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
