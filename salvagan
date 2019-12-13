@@ -1,0 +1,6 @@
+case SALVAGAN:
+				{
+                    ClearBackground(RAYWHITE);
+                    DrawText("Parabéns! Você entrou nos classificados!", 75, desce+130, 30, DARKGRAY);
+                    DrawText("Entre seu nome", 275, desce+210, 30, BLACK);
+				}
